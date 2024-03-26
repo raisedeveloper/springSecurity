@@ -96,7 +96,7 @@ public class MyOAuth2UserService extends DefaultOAuth2UserService {
 	            Map<String, Object> account = (Map) oAuth2User.getAttribute("kakao_account");
 	        	uname = (String) properties.get("nickname");
 	            uname = (uname == null) ? "kakao_user" : uname;
-	            email = (String) account.get("email");
+	            email = "yj960302@icloud.com";
 	            picture = (String) properties.get("profile_image");
 	            securityUser = SecurityUser.builder()
 	                  .uid(uid).pwd(hashedPwd).uname(uname).email(email).picture(picture)
@@ -106,6 +106,23 @@ public class MyOAuth2UserService extends DefaultOAuth2UserService {
 	            log.info("카카오 계정을 통해 회원가입이 되었습니다.");
 	         }
 	         break;
+	         
+		case "facebook":
+	         String fid = oAuth2User.getAttribute("id");
+				uid = provider + "_" + fid;
+				securityUser = securityService.getUserByUid(uid);
+				if (securityUser == null) {				// 가입이 안되어 있으므로 가입 진행
+					uname = oAuth2User.getAttribute("name");
+					uname = (uname == null) ? "facebook_user" : uname;
+					email = oAuth2User.getAttribute("email");
+					securityUser = SecurityUser.builder()
+							.uid(uid).pwd(hashedPwd).uname(uname).email(email)
+							.provider(provider).build();
+					securityService.insertSecurityUser(securityUser);
+					securityUser = securityService.getUserByUid(uid);
+					log.info("페이스북 계정을 통해 회원가입이 되었습니다.");
+				}
+				break;
 		}
 		
 		return new MyUserDetails(securityUser, oAuth2User.getAttributes());
