@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+// lombok 기능
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
-@NoArgsConstructor		//lombok의 역할
+@NoArgsConstructor		
 @Builder
 public class Member {
 	private int mid;

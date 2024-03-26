@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString
-@Builder
 public class SecurityUser {
 	private String uid;
 	private String pwd;

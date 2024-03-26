@@ -21,10 +21,11 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		SecurityUser securityUser = securityService.getUserByUid(username);
 		
-		if (securityUser !=null) {
+		if (securityUser != null) {
 			log.info("Login 완료: " + securityUser.getUid());
 			return new MyUserDetails(securityUser);
 		}
 		return null;
 	}
+
 }

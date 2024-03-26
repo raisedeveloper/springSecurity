@@ -14,8 +14,9 @@ public interface SecurityUserService {
 	int getSecurityUserCount();
 	
 	void insertSecurityUser(SecurityUser securityUser);
-
+	
 	void updateSecurityUser(SecurityUser securityUser);
 	
 	void deleteSecurityUser(String uid);
+	
 }
